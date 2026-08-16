@@ -135,6 +135,72 @@ class QuantumCryptLabApp(ctk.CTk):
             command=lambda: _copy_to_clipboard(self, _get_textbox(enc_out_tb))
         ).pack(side="right")
 
+        # ------------------- EDUCATIONAL SECTION -------------------
+        edu_container = ctk.CTkFrame(scroll, fg_color="transparent")
+        edu_container.pack(fill="x", padx=10, pady=20)
+
+        card1 = ctk.CTkFrame(edu_container, fg_color=BG_CARD, corner_radius=10)
+        card1.pack(side="left", fill="both", expand=True, padx=(0, 5))
+        
+        card2 = ctk.CTkFrame(edu_container, fg_color=BG_CARD, corner_radius=10)
+        card2.pack(side="right", fill="both", expand=True, padx=(5, 0))
+
+        if is_quantum:
+            title1 = "How BB84 Works"
+            text1 = (
+                "BB84 is a Quantum Key Distribution protocol used to establish a shared secret key.\n\n"
+                "① User A prepares quantum bits\n"
+                "Random bits are encoded using randomly selected quantum bases.\n\n"
+                "② User B measures the quantum bits\n"
+                "User B independently chooses bases to measure the received quantum states.\n\n"
+                "③ Bases are compared\n"
+                "User A and User B compare their selected bases, not the actual secret bits.\n\n"
+                "④ Matching bases are kept\n"
+                "Only positions where both used the same basis are retained.\n\n"
+                "⑤ A shared key is formed\n"
+                "The remaining matching bits can be used as a shared secret key."
+            )
+            title2 = "How the Key Is Used"
+            text2 = (
+                "BB84 distributes the key; it does not directly encrypt the message.\n\n"
+                "① Your Key\n"
+                "The secret key entered by the user for this demonstration.\n\n"
+                "② BB84 Shared Key\n"
+                "BB84 demonstrates how two parties can establish a shared secret key.\n\n"
+                "③ AES Encryption\n"
+                "The shared key can then be used with AES to encrypt the message.\n\n"
+                "④ Encrypted Message\n"
+                "The readable message is converted into ciphertext."
+            )
+        else:
+            title1 = "How AES Encryption Works"
+            text1 = (
+                "① Plain Text\n"
+                "The original readable message entered by the user.\n\n"
+                "② Secret Key\n"
+                "The key is used by AES to transform the message.\n\n"
+                "③ AES Encryption\n"
+                "AES converts the readable message into ciphertext.\n\n"
+                "④ Encrypted Message\n"
+                "The resulting ciphertext cannot be read directly without the correct key."
+            )
+            title2 = "How AES Decryption Works"
+            text2 = (
+                "① Encrypted Message\n"
+                "The ciphertext that needs to be decrypted.\n\n"
+                "② Same Secret Key\n"
+                "The exact same key used for encryption must be provided.\n\n"
+                "③ AES Decryption\n"
+                "The algorithm reverses the encryption process.\n\n"
+                "④ Original Message\n"
+                "The original plain text is fully restored."
+            )
+            
+        ctk.CTkLabel(card1, text=title1, font=ctk.CTkFont(size=14, weight="bold"), text_color="#E2E8F0").pack(pady=(15, 10))
+        ctk.CTkLabel(card1, text=text1, font=ctk.CTkFont(size=12), text_color="#CBD5E1", justify="left", wraplength=350).pack(pady=(0, 15), padx=20, anchor="w")
+
+        ctk.CTkLabel(card2, text=title2, font=ctk.CTkFont(size=14, weight="bold"), text_color="#E2E8F0").pack(pady=(15, 10))
+        ctk.CTkLabel(card2, text=text2, font=ctk.CTkFont(size=12), text_color="#CBD5E1", justify="left", wraplength=350).pack(pady=(0, 15), padx=20, anchor="w")
 
         # ------------------- DECRYPT SECTION -------------------
         dec_frame = ctk.CTkFrame(scroll, fg_color=BG_CARD, corner_radius=10)
